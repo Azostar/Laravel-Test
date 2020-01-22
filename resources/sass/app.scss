@@ -1,0 +1,231 @@
+$menu-width:10em;
+$menu-padding:1em;
+$font:#333;
+$background-heavy:#333;
+$background-heavy-hover:#373737;
+$font-heavy:#ccc;
+$font-heavy-hover:#eee;
+$background-med:#555;
+$background-med-hover:#575757;
+$font-med: #eee;
+$font-med-hover: #fff;
+$background-light:#eee;
+$background-light-hover:#e7e7e7;
+$font-light:#222;
+$font-light-hover:#444;
+$border-color: #999;
+$border-width: 1px;
+
+@mixin content{
+	margin: 0 1em;
+	flex:100%;
+}
+
+@mixin resource-header{
+	padding:1em;
+	border-radius:.3em .3em 0 0;
+	background-color:$background-med;
+	color:$font-med;
+	font-weight:900;
+	flex:100%;
+}
+
+@mixin resource{
+	margin:1em 3em;
+	flex:100%;
+	@include flex-container;
+}
+
+@mixin resource-content{
+	background-color:$background-light;
+	border:$border-width solid $background-med;
+	border-radius:0 0 .3em .3em;
+	box-sizing:border-box;
+	border-top:0;
+	padding:1em;
+	flex:100%;
+}
+
+@mixin flex-container{
+	align-content:flex-start;
+	justify-content:center;
+	display:flex;
+	flex-wrap: wrap;
+}
+
+*{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: baseline;
+	font-family: Arial, Helvetica, sans-serif;
+	font-color:$font-light;
+}
+
+// NAVIGATION
+
+nav.main {
+	height:100%;
+	width:$menu-width;
+	padding: $menu-padding;
+	position:fixed;
+	box-sizing:border-box;
+	z-index:1;
+	top:0;
+	left:0;
+	background-color:$background-heavy;
+	overflow-x:hidden;
+	-webkit-box-shadow: 2px 0px 1px -1px rgba(0,0,0,0.8);
+	-moz-box-shadow: 2px 0px 1px -1px rgba(0,0,0,0.8);
+	box-shadow: 2px 0px 1px -1px rgba(0,0,0,0.8);
+
+		ul{
+			list-style:none;
+		}
+
+		a{
+		color:$font-heavy;
+			text-decoration:none;
+			cursor:pointer;
+			&:hover{
+			color:$font-heavy-hover;
+			}
+		}
+}
+
+// CONTENT
+
+content{
+	@include flex-container;
+	margin-left:$menu-width;
+	font:$font;
+
+	h1{
+		text-align:center;
+		font-size: 3em;
+		padding:1em;
+		flex:100%;
+		background-color:$background-med;
+		color:$font-med;
+		-webkit-box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.8);
+		-moz-box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.8);
+		box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.8);
+		margin-bottom:.5em;
+	}
+
+	h2{
+		@include content;
+		margin-bottom: .5em;
+		font-size: 2em;
+		color:$font-light;
+	}
+
+	table{
+		@include resource;
+		max-width:50em;
+
+		thead{
+			@include flex-container;
+			flex: 100%;
+
+			tr{
+				@include flex-container;
+				flex: 100%;
+
+				td{
+					@include resource-header;
+					margin:0;
+				}
+			}
+		}
+		tbody{
+			@include resource-content;
+			padding:0;
+
+			tr{
+				padding:1em;
+
+				&:nth-child(odd){
+					background-color:#f5f5f5u;
+				}
+			}
+
+			.icon{
+				max-width:1em;
+				padding:.5em .5em 0 .5em;
+			}
+
+			.table-button{
+				font-size:1.5em;
+				cursor:pointer;
+				background:0;
+			}
+
+			.task-item{
+				@include flex-container;
+				flex-wrap:wrap;
+				align-items:strech;
+				padding-bottom:1em;
+
+				td:first-child{
+					font-weight:bold;
+					padding-bottom:0.3em;
+					flex:100%;
+				}
+
+				td:nth-child(2){
+					flex:100%;
+				}
+
+			}
+		}
+	}
+
+	p{
+		margin:1em 2em;
+		flex:100%;
+	}
+
+	.actioned{
+		@include resource;
+		background-color: lightgreen;
+		border: 2px solid green;
+		padding:1em;
+		max-width:50em;
+	}
+
+	.form-wrapper{
+		@include resource;
+		max-width:30em;
+
+		.form-header{
+			@include resource-header;
+		}
+
+		form{
+			@include resource-content;
+
+			&>*{
+				border-radius:.3em;
+				margin-bottom:1em;
+				width:100%;
+				box-sizing:border-box;
+				padding:1em;
+				font-size:1em;
+				border: $border-width solid $border-color;
+			}
+
+			button{
+				border:0;
+				background-color:$background-heavy;
+				color:$font-med;
+				width:auto;
+
+				&:hover{
+					background-color:$background-heavy-hover;
+					color:$font-med-hover;
+				}
+			}
+		}
+	}
+}
